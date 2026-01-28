@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purbhanchal Restro & Bar - Digital Menu</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== CSS VARIABLES & RESET ===== */
+        :root {
+            /* Custom Premium Color Palette */
+            --nepal-crimson: #DC143C;
+            --nepal-burgundy: #8B0000;
+            --nepal-gold: #FFD700;
+            --nepal-amber: #FFBF00;
+            
+            --lounge-darkest: #0A0A0F;
+            --lounge-darker: #131318;
+            --lounge-dark: #1A1A24;
+            --lounge-accent: #252535;
+            --lounge-light: #2D2D3D;
+            --lounge-lighter: #3A3A4F;
+            
+            --neon-blue: #00E5FF;
+            --neon-purple: #B388FF;
+            --neon-pink: #FF4081;
+            --neon-orange: #FF6E40;
+            
+            --text-primary: #FFFFFF;
+            --text-secondary: #B8B8C8;
+            --text-muted: #6B6B7B;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--lounge-darkest) 0%, var(--lounge-darker) 50%, var(--lounge-dark) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(220, 20, 60, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 229, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* ===== TYPOGRAPHY ===== */
+        .font-display {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            letter-spacing: 2px;
+        }
+        
+        .font-nepali {
+            font-family: 'Mukta', sans-serif;
+        }
+        
+        /* ===== HEADER ===== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(26, 26, 36, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            padding: 1rem 0;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--nepal-crimson), var(--nepal-gold));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(220, 20, 60, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 4px 20px rgba(220, 20, 60, 0.3); }
+            100% { box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5); }
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--nepal-gold), var(--nepal-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo-text p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .cart-btn {
+            position: relative;
+            background: linear-gradient(135deg, var(--nepal-crimson), var(--nepal-burgundy));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.4);
+        }
+        
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(220, 20, 60, 0.6);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--nepal-gold);
+            color: var(--lounge-darkest);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            animation: pulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* ===== SEARCH BAR ===== */
+        .search-section {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(37, 37, 53, 0.6);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .search-input:focus {
+            border-color: var(--nepal-gold);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--nepal-gold);
+        }
+        
+        /* ===== CATEGORY NAVIGATION ===== */
+        .category-nav {
+            position: sticky;
+            top: 90px;
+            z-index: 999;
+            background: rgba(19, 19, 24, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        
+        .category-nav::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .category-chips {
+            display: flex;
+            gap: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .category-chip {
+            background: rgba(37, 37, 53, 0.6);
+            border: 2px solid transparent;
+            color: var(--text-secondary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .category-chip:hover {
+            border-color: var(--nepal-gold);
+            color: var(--nepal-gold);
+            transform: translateY(-2px);
+        }
+        
+        .category-chip.active {
+            background: linear-gradient(135deg, var(--nepal-crimson), var(--nepal-burgundy));
+            border-color: var(--nepal-gold);
+            color: white;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.4);
+        }
+        
+        /* ===== MENU GRID ===== */
+        .menu-section {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .category-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, var(--nepal-gold), var(--nepal-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        /* ===== MENU CARD (3D EFFECT) ===== */
+        .menu-card {
+            background: rgba(37, 37, 53, 0.4);
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(255, 215, 0, 0.1);
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+            border-color: var(--nepal-gold);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(255, 215, 0, 0.2);
+        }
+        
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 215, 0, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .menu-card:hover::before {
+            opacity: 1;
+        }
+        
+        .card-image-container {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            background: var(--lounge-dark);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .menu-card:hover .card-image {
+            transform: scale(1.15);
+        }
+        
+        .card-badges {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 2;
+            flex-wrap: wrap;
+            max-width: calc(100% - 2rem);
+        }
+        
+        .badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        .badge-popular {
+            background: rgba(220, 20, 60, 0.9);
+            color: white;
+        }
+        
+        .badge-new {
+            background: rgba(0, 229, 255, 0.9);
+            color: white;
+        }
+        
+        .badge-veg {
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+        }
+        
+        .badge-spicy {
+            background: rgba(255, 110, 64, 0.9);
+            color: white;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .card-title-nepali {
+            font-size: 0.9rem;
+            color: var(--nepal-gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--nepal-gold);
+        }
+        
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, var(--nepal-crimson), var(--nepal-burgundy));
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .add-to-cart-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.5);
+        }
+        
+        .add-to-cart-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* ===== CART SIDEBAR ===== */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background: rgba(19, 19, 24, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            flex-direction: column;
+            border-left: 2px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .cart-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .cart-header {
+            padding: 1.5rem;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .close-cart-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .close-cart-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+        
+        .cart-item {
+            background: rgba(37, 37, 53, 0.6);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .cart-item-price {
+            color: var(--nepal-gold);
+            font-weight: 700;
+        }
+        
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .quantity-btn {
+            background: var(--lounge-light);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .quantity-btn:hover {
+            background: var(--nepal-gold);
+            color: var(--lounge-darkest);
+        }
+        
+        .quantity-display {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .remove-item-btn {
+            background: rgba(220, 20, 60, 0.2);
+            border: 1px solid var(--nepal-crimson);
+            color: var(--nepal-crimson);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+        
+        .remove-item-btn:hover {
+            background: var(--nepal-crimson);
+            color: white;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-cart-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 2px solid rgba(255, 215, 0, 0.2);
+            background: rgba(10, 10, 15, 0.9);
+        }
+        
+        .table-number-input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(37, 37, 53, 0.6);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            outline: none;
+        }
+        
+        .table-number-input:focus {
+            border-color: var(--nepal-gold);
+        }
+        
+        .discount-section {
+            background: rgba(37, 37, 53, 0.6);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .play-game-btn {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+        
+        .play-game-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(179, 136, 255, 0.5);
+        }
+        
+        .play-game-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .discount-info {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .discount-applied {
+            color: var(--nepal-gold);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .cart-summary {
+            margin-bottom: 1rem;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .summary-row.total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            padding-top: 0.5rem;
+            border-top: 2px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .summary-row.discount {
+            color: var(--nepal-gold);
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* ===== DISCOUNT GAME MODAL ===== */
+        .game-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(19, 19, 24, 0.98);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--nepal-gold);
+            border-radius: 30px;
+            padding: 2rem;
+            z-index: 3000;
+            max-width: 500px;
+            width: 90%;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .game-modal.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: all;
+        }
+        
+        .game-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .game-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .game-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .scratch-card {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            margin: 0 auto 2rem;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        .scratch-result {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--lounge-dark), var(--lounge-accent));
+            border: 3px solid var(--nepal-gold);
+            border-radius: 20px;
+        }
+        
+        .result-percentage {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--nepal-gold);
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .result-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+        
+        .game-instructions {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .close-game-btn {
+            background: linear-gradient(135deg, var(--nepal-crimson), var(--nepal-burgundy));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .close-game-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.5);
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+            
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .cart-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .category-title {
+                font-size: 2rem;
+            }
+            
+            .cart-sidebar {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🏔️</div>
+                <div class="logo-text">
+                    <h1 class="font-display">PURBHANCHAL</h1>
+                    <p>RESTRO & BAR</p>
+                </div>
+            </div>
+            <button class="cart-btn" onclick="toggleCart()">
+                🛒 Cart
+                <span class="cart-badge" id="cartBadge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input 
+                type="text" 
+                class="search-input" 
+                placeholder="Search your favorite dishes..."
+                id="searchInput"
+                oninput="handleSearch(this.value)"
+            >
+        </div>
+    </section>
+
+    <!-- Category Navigation -->
+    <nav class="category-nav">
+        <div class="category-chips" id="categoryChips"></div>
+    </nav>
+
+    <!-- Menu Sections -->
+    <main class="menu-section" id="menuContainer"></main>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2 class="cart-title">Your Order</h2>
+            <button class="close-cart-btn" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer"></div>
+        <div class="cart-footer">
+            <input 
+                type="text" 
+                class="table-number-input" 
+                placeholder="Enter Table Number (e.g., T5)"
+                id="tableNumberInput"
+            >
+            
+            <div class="discount-section" id="discountSection">
+                <button class="play-game-btn" id="playGameBtn" onclick="openDiscountGame()">
+                    🎰 Play & Win Discount!
+                </button>
+                <p class="discount-info" id="discountInfo">Scratch to win up to 20% off!</p>
+                <p class="discount-applied" id="discountApplied"></p>
+            </div>
+            
+            <div class="cart-summary" id="cartSummary"></div>
+            
+            <button class="whatsapp-btn" id="whatsappBtn" onclick="sendToWhatsApp()">
+                📱 Send Order via WhatsApp
+            </button>
+        </div>
+    </aside>
+
+    <!-- Discount Game Modal -->
+    <div class="game-overlay" id="gameOverlay" onclick="closeDiscountGame()"></div>
+    <div class="game-modal" id="gameModal">
+        <h2 class="game-title font-display">SCRATCH & WIN!</h2>
+        <p class="game-instructions">Scratch the card below to reveal your discount</p>
+        <div class="scratch-card" id="scratchCard">
+            <canvas id="scratchCanvas" class="scratch-canvas"></canvas>
+            <div class="scratch-result">
+                <div class="result-percentage" id="resultPercentage"></div>
+                <p class="result-text">DISCOUNT</p>
+            </div>
+        </div>
+        <button class="close-game-btn" onclick="closeDiscountGame()">Claim Discount</button>
+    </div>
+
+    <script>
+        // ===== MENU DATA WITH REAL FOOD IMAGES =====
+        const menuData = [
+            // SNACKS
+            {
+                id: 'snack-1',
+                name: 'Chicken Chilli',
+                nameNepali: 'चिकेन चिल्ली',
+                description: 'Spicy Indo-Chinese style chicken with bell peppers and onions',
+                price: 450,
+                category: 'snacks',
+                image: 'https://www.licious.in/blog/wp-content/uploads/2020/12/Chilli-Chicken.jpg',
+                isSpicy: true,
+                isPopular: true,
+            },
+            {
+                id: 'snack-2',
+                name: 'Paneer Chilli',
+                nameNepali: 'पनीर चिल्ली',
+                description: 'Crispy paneer cubes tossed in spicy chilli sauce',
+                price: 380,
+                category: 'snacks',
+                image: 'https://www.cookwithmanali.com/wp-content/uploads/2015/07/Restaurant-Style-Recipe-Chilli-Paneer.jpg',
+                isVeg: true,
+                isSpicy: true,
+            },
+            {
+                id: 'snack-3',
+                name: 'French Fries',
+                description: 'Golden crispy potato fries with peri-peri seasoning',
+                price: 200,
+                category: 'snacks',
+                image: 'https://static.toiimg.com/thumb/54659022.cms?imgsize=275086&width=800&height=800',
+                isVeg: true,
+            },
+            {
+                id: 'snack-4',
+                name: 'Chicken Wings',
+                description: 'BBQ glazed wings with hot sauce dip',
+                price: 520,
+                category: 'snacks',
+                image: 'https://www.seriouseats.com/thmb/lNW4izW32EWWKZd2q_06EBE6lTI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2015__01__20150108-buffalo-wings-food-lab-51-2a1bb84997304a5197e6b88e31c6eb7e.jpg',
+                isSpicy: true,
+            },
+            {
+                id: 'snack-5',
+                name: 'Spring Rolls',
+                description: 'Crispy vegetable rolls with sweet chili sauce',
+                price: 280,
+                category: 'snacks',
+                image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2021/12/spring-rolls-recipe.jpg',
+                isVeg: true,
+            },
+            {
+                id: 'snack-6',
+                name: 'Chicken Pakora',
+                nameNepali: 'चिकेन पकोडा',
+                description: 'Deep fried spiced chicken fritters',
+                price: 320,
+                category: 'snacks',
+                image: 'https://www.whiskaffair.com/wp-content/uploads/2020/08/Chicken-Pakora-2-3.jpg',
+                isSpicy: true,
+            },
+            
+            // MOMO
+            {
+                id: 'momo-1',
+                name: 'Buff Momo (Steam)',
+                nameNepali: 'बफ मोमो (भाप)',
+                description: 'Traditional Nepali buffalo momo with jhol achar',
+                price: 180,
+                category: 'momo',
+                image: 'https://www.archanaskitchen.com/images/archanaskitchen/1-Author/Jyothi_Rajesh/Chicken_Momos_Recipe_Delicious_Steamed_Chicken_Dumplings.jpg',
+                isPopular: true,
+            },
+            {
+                id: 'momo-2',
+                name: 'Chicken Momo (Steam)',
+                nameNepali: 'चिकेन मोमो (भाप)',
+                description: 'Juicy chicken momo with traditional jhol',
+                price: 200,
+                category: 'momo',
+                image: 'https://www.whiskaffair.com/wp-content/uploads/2020/03/Chicken-Momos-2-3.jpg',
+                isPopular: true,
+            },
+            {
+                id: 'momo-3',
+                name: 'Chicken Momo (Fried)',
+                nameNepali: 'चिकेन मोमो (तेलेको)',
+                description: 'Golden fried chicken momo with sesame chutney',
+                price: 220,
+                category: 'momo',
+                image: 'https://pipingpotcurry.com/wp-content/uploads/2020/11/Momos-in-Air-Fryer-Piping-Pot-Curry.jpg',
+            },
+            {
+                id: 'momo-4',
+                name: 'Veg Momo (Steam)',
+                nameNepali: 'तरकारी मोमो (भाप)',
+                description: 'Mixed vegetable momo with peanut sauce',
+                price: 160,
+                category: 'momo',
+                image: 'https://www.vegrecipesofindia.com/wp-content/uploads/2021/06/momos-recipe-1.jpg',
+                isVeg: true,
+            },
+            {
+                id: 'momo-5',
+                name: 'C-Momo',
+                nameNepali: 'सी-मोमो',
+                description: 'Fried momo topped with special sauce and vegetables',
+                price: 250,
+                category: 'momo',
+                image: 'https://i.ytimg.com/vi/WJy1ERAv6vI/maxresdefault.jpg',
+                isNew: true,
+            },
+            {
+                id: 'momo-6',
+                name: 'Paneer Momo',
+                nameNepali: 'पनीर मोमो',
+                description: 'Soft paneer filling with herbs and spices',
+                price: 220,
+                category: 'momo',
+                image: 'https://www.vegrecipesofindia.com/wp-content/uploads/2021/06/paneer-momos-recipe-1.jpg',
+                isVeg: true,
+            },
+            
+            // THUKPA
+            {
+                id: 'thukpa-1',
+                name: 'Chicken Thukpa',
+                nameNepali: 'चिकेन थुक्पा',
+                description: 'Hearty noodle soup with tender chicken and vegetables',
+                price: 280,
+                category: 'thukpa',
+                image: 'https://www.whiskaffair.com/wp-content/uploads/2019/11/Chicken-Thukpa-2-3.jpg',
+                isPopular: true,
+            },
+            {
+                id: 'thukpa-2',
+                name: 'Veg Thukpa',
+                nameNepali: 'तरकारी थुक्पा',
+                description: 'Traditional Tibetan noodle soup with mixed vegetables',
+                price: 240,
+                category: 'thukpa',
+                image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2021/10/veg-thukpa-recipe.jpg',
+                isVeg: true,
+            },
+            {
+                id: 'thukpa-3',
+                name: 'Buff Thukpa',
+                nameNepali: 'बफ थुक्पा',
+                description: 'Spicy buffalo thukpa with authentic Nepali spices',
+                price: 260,
+                category: 'thukpa',
+                image: 'https://i.ytimg.com/vi/lm_NmM8rsQU/maxresdefault.jpg',
+                isSpicy: true,
+            },
+            {
+                id: 'thukpa-4',
+                name: 'Egg Thukpa',
+                nameNepali: 'अण्डा थुक्पा',
+                description: 'Noodle soup with boiled eggs and vegetables',
+                price: 220,
+                category: 'thukpa',
+                image: 'https://www.whiskaffair.com/wp-content/uploads/2020/01/Egg-Thukpa-2-3.jpg',
+            },
+            
+            // MAIN COURSE
+            {
+                id: 'main-1',
+                name: 'Chicken Biryani',
+                nameNepali: 'चिकेन बिर्यानी',
+                description: 'Aromatic basmati rice cooked with tender chicken and spices',
+                price: 420,
+                category: 'main-course',
+                image: 'https://www.licious.in/blog/wp-content/uploads/2020/12/Hyderabadi-chicken-Biryani.jpg',
+                isPopular: true,
+                isSpicy: true,
+            },
+            {
+                id: 'main-2',
+                name: 'Dal Bhat Set',
+                nameNepali: 'दाल भात सेट',
+                description: 'Traditional Nepali meal with dal, rice, curry, and achar',
+                price: 350,
+                category: 'main-course',
+                image: 'https://www.196flavors.com/wp-content/uploads/2020/03/dal-bhat-1-fp.jpg',
+                isVeg: true,
+                isPopular: true,
+            },
+            {
+                id: 'main-3',
+                name: 'Butter Chicken',
+                description: 'Creamy tomato-based curry with tender chicken pieces',
+                price: 480,
+                category: 'main-course',
+                image: 'https://cafedelites.com/wp-content/uploads/2019/01/Butter-Chicken-IMAGE-64.jpg',
+                isPopular: true,
+            },
+            {
+                id: 'main-4',
+                name: 'Paneer Tikka Masala',
+                description: 'Grilled paneer in rich, spiced tomato gravy',
+                price: 420,
+                category: 'main-course',
+                image: 'https://www.vegrecipesofindia.com/wp-content/uploads/2017/05/paneer-tikka-masala-recipe-1.jpg',
+                isVeg: true,
+                isSpicy: true,
+            },
+            {
+                id: 'main-5',
+                name: 'Chicken Chowmein',
+                nameNepali: 'चिकेन चाउमिन',
+                description: 'Stir-fried noodles with chicken and vegetables',
+                price: 300,
+                category: 'main-course',
+                image: 'https://www.whiskaffair.com/wp-content/uploads/2019/11/Chicken-Chowmein-2-3.jpg',
+            },
+            {
+                id: 'main-6',
+                name: 'Fried Rice',
+                nameNepali: 'फ्राइड राइस',
+                description: 'Wok-tossed rice with vegetables and choice of protein',
+                price: 280,
+                category: 'main-course',
+                image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2022/02/veg-fried-rice-recipe.jpg',
+            },
+            
+            // DRINKS
+            {
+                id: 'drink-1',
+                name: 'Masala Chai',
+                nameNepali: 'मसाला चिया',
+                description: 'Traditional spiced tea with milk',
+                price: 80,
+                category: 'drinks',
+                image: 'https://www.cookwithmanali.com/wp-content/uploads/2019/10/Masala-Chai-Indian-Spiced-Tea.jpg',
+                isVeg: true,
+            },
+            {
+                id: 'drink-2',
+                name: 'Fresh Lime Soda',
+                description: 'Refreshing lime juice with soda and mint',
+                price: 120,
+                category: 'drinks',
+                image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2022/04/lemon-soda-recipe.jpg',
+                isVeg: true,
+            },
+            {
+                id: 'drink-3',
+                name: 'Mango Lassi',
+                description: 'Creamy yogurt drink blended with fresh mango',
+                price: 180,
+                category: 'drinks',
+                image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2021/04/mango-lassi-recipe.jpg',
+                isVeg: true,
+                isPopular: true,
+            },
+            {
+                id: 'drink-4',
+                name: 'Cold Coffee',
+                description: 'Iced coffee with milk and ice cream',
+                price: 200,
+                category: 'drinks',
+                image: 'https://www.whiskaffair.com/wp-content/uploads/2020/06/Cold-Coffee-2-3.jpg',
+                isVeg: true,
+            },
+            {
+                id: 'drink-5',
+                name: 'Fresh Juice',
+                description: 'Seasonal fresh fruit juice (Orange/Watermelon/Pineapple)',
+                price: 150,
+                category: 'drinks',
+                image: 'https://www.seriouseats.com/thmb/vPODYP7p_WmfJDD8OMs8InyTaug=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2016__04__20160426-fresh-fruit-juice-vicky-wasik-1-3ab6030e09f24b3abe5f2e4ad97e77a3.jpg',
+                isVeg: true,
+            },
+            {
+                id: 'drink-6',
+                name: 'Mineral Water',
+                description: 'Chilled bottled water',
+                price: 50,
+                category: 'drinks',
+                image: 'https://5.imimg.com/data5/SELLER/Default/2022/6/DW/LI/XR/20419581/mineral-water-bottle-500x500.jpg',
+                isVeg: true,
+            },
+            
+            // BAR MENU
+            {
+                id: 'bar-1',
+                name: 'Kingfisher Beer',
+                description: 'Premium Indian lager beer (650ml)',
+                price: 350,
+                category: 'bar',
+                image: 'https://www.thewhiskyexchange.com/media/38931/kingfisher-lager.jpg',
+                isPopular: true,
+            },
+            {
+                id: 'bar-2',
+                name: 'Tuborg Beer',
+                description: 'Smooth Danish beer (650ml)',
+                price: 320,
+                category: 'bar',
+                image: 'https://products3.imgix.drizly.com/ci-tuborg-green-b0e7a9e79f11f6ad.jpeg',
+            },
+            {
+                id: 'bar-3',
+                name: 'Rum & Coke',
+                description: 'Classic cocktail with premium rum',
+                price: 450,
+                category: 'bar',
+                image: 'https://www.liquor.com/thmb/IlS3fHLDw0_V4xMDQbKe3rKRXPQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/rum-and-coke-720x720-primary-74f8c8170b6d4cb188de7ede8f2539c0.jpg',
+            },
+            {
+                id: 'bar-4',
+                name: 'Whiskey (Peg)',
+                description: 'Premium whiskey - 60ml serve',
+                price: 400,
+                category: 'bar',
+                image: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/whiskey-neat-in-glass-royalty-free-image-1590530981.jpg',
+            },
+            {
+                id: 'bar-5',
+                name: 'Mojito',
+                description: 'Refreshing mint cocktail with rum and lime',
+                price: 480,
+                category: 'bar',
+                image: 'https://www.acouplecooks.com/wp-content/uploads/2020/07/Mojito-Recipe-005.jpg',
+                isPopular: true,
+            },
+            {
+                id: 'bar-6',
+                name: 'Vodka Cocktail',
+                description: 'Premium vodka with your choice of mixer',
+                price: 420,
+                category: 'bar',
+                image: 'https://www.liquor.com/thmb/x0G1JKTrjpAj2KN9D6Gfj9V7G5E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/vodka-soda-720x720-primary-2d07af73e38a4e2e8ac086c93e1f226a.jpg',
+            },
+            
+            // DESSERT
+            {
+                id: 'dessert-1',
+                name: 'Gulab Jamun',
+                nameNepali: 'गुलाब जामुन',
+                description: 'Traditional sweet dumplings in rose-flavored syrup',
+                price: 150,
+                category: 'dessert',
+                image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2020/12/gulab-jamun-recipe.jpg',
+                isVeg: true,
+                isPopular: true,
+            },
+            {
+                id: 'dessert-2',
+                name: 'Ice Cream',
+                description: 'Choice of vanilla, chocolate, or strawberry (2 scoops)',
+                price: 180,
+                category: 'dessert',
+                image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2022/05/homemade-ice-cream-recipe.jpg',
+                isVeg: true,
+            },
+            {
+                id: 'dessert-3',
+                name: 'Jalebi',
+                nameNepali: 'जलेबी',
+                description: 'Crispy sweet spirals soaked in sugar syrup',
+                price: 120,
+                category: 'dessert',
+                image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2021/11/jalebi-recipe.jpg',
+                isVeg: true,
+            },
+            {
+                id: 'dessert-4',
+                name: 'Chocolate Brownie',
+                description: 'Warm chocolate brownie with vanilla ice cream',
+                price: 250,
+                category: 'dessert',
+                image: 'https://www.browneyedbaker.com/wp-content/uploads/2020/01/brownies-76-600.jpg',
+                isVeg: true,
+                isNew: true,
+            },
+            {
+                id: 'dessert-5',
+                name: 'Rasgulla',
+                nameNepali: 'रसगुल्ला',
+                description: 'Soft cottage cheese balls in sugar syrup',
+                price: 140,
+                category: 'dessert',
+                image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2021/07/rasgulla-recipe.jpg',
+                isVeg: true,
+            },
+        ];
+
+        const categories = [
+            { id: 'all', name: 'All Items', icon: '🍽️' },
+            { id: 'snacks', name: 'Snacks', icon: '🍟' },
+            { id: 'momo', name: 'Momo', icon: '🥟' },
+            { id: 'thukpa', name: 'Thukpa', icon: '🍜' },
+            { id: 'main-course', name: 'Main Course', icon: '🍛' },
+            { id: 'drinks', name: 'Drinks', icon: '🍹' },
+            { id: 'bar', name: 'Bar Menu', icon: '🍺' },
+            { id: 'dessert', name: 'Dessert', icon: '🍰' },
+        ];
+
+        // ===== STATE MANAGEMENT =====
+        let cart = [];
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let discountPercentage = 0;
+        let hasPlayedGame = false;
+
+        // ===== INITIALIZATION =====
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCategories();
+            renderMenu();
+            updateCartUI();
+            loadCartFromStorage();
+            checkGameStatus();
+        });
+
+        // ===== CATEGORY RENDERING =====
+        function renderCategories() {
+            const container = document.getElementById('categoryChips');
+            container.innerHTML = categories.map(cat => `
+                <div class="category-chip ${cat.id === currentCategory ? 'active' : ''}" 
+                     onclick="filterByCategory('${cat.id}')">
+                    <span>${cat.icon}</span>
+                    <span>${cat.name}</span>
+                </div>
+            `).join('');
+        }
+
+        function filterByCategory(categoryId) {
+            currentCategory = categoryId;
+            renderCategories();
+            renderMenu();
+            
+            // Smooth scroll to menu
+            if (categoryId !== 'all') {
+                const categoryElement = document.getElementById(`category-${categoryId}`);
+                if (categoryElement) {
+                    categoryElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+
+        // ===== MENU RENDERING =====
+        function renderMenu() {
+            const container = document.getElementById('menuContainer');
+            let filteredData = menuData;
+
+            // Apply search filter
+            if (searchQuery) {
+                filteredData = filteredData.filter(item =>
+                    item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    (item.nameNepali && item.nameNepali.includes(searchQuery))
+                );
+            }
+
+            // Apply category filter
+            if (currentCategory !== 'all') {
+                filteredData = filteredData.filter(item => item.category === currentCategory);
+            }
+
+            // Group by category
+            const groupedData = {};
+            filteredData.forEach(item => {
+                if (!groupedData[item.category]) {
+                    groupedData[item.category] = [];
+                }
+                groupedData[item.category].push(item);
+            });
+
+            // Render grouped categories
+            container.innerHTML = Object.keys(groupedData).map(category => {
+                const categoryName = categories.find(c => c.id === category)?.name || category;
+                const items = groupedData[category];
+
+                return `
+                    <div id="category-${category}">
+                        <h2 class="category-title font-display">${categoryName}</h2>
+                        <div class="menu-grid">
+                            ${items.map(item => createMenuCard(item)).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            if (filteredData.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 4rem 1rem; color: var(--text-secondary);">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🔍</div>
+                        <h3>No items found</h3>
+                        <p>Try a different search or category</p>
+                    </div>
+                `;
+            }
+        }
+
+        function createMenuCard(item) {
+            const badges = [];
+            if (item.isPopular) badges.push('<span class="badge badge-popular">⭐ Popular</span>');
+            if (item.isNew) badges.push('<span class="badge badge-new">✨ New</span>');
+            if (item.isVeg) badges.push('<span class="badge badge-veg">🌱 Veg</span>');
+            if (item.isSpicy) badges.push('<span class="badge badge-spicy">🌶️ Spicy</span>');
+
+            return `
+                <div class="menu-card" data-item-id="${item.id}">
+                    <div class="card-image-container">
+                        <img src="${item.image}" alt="${item.name}" class="card-image" loading="lazy">
+                        <div class="card-badges">
+                            ${badges.join('')}
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${item.name}</h3>
+                        ${item.nameNepali ? `<p class="card-title-nepali font-nepali">${item.nameNepali}</p>` : ''}
+                        <p class="card-description">${item.description}</p>
+                        <div class="card-footer">
+                            <span class="card-price">NPR ${item.price}</span>
+                            <button class="add-to-cart-btn" onclick="addToCart('${item.id}')">
+                                <span>Add</span>
+                                <span>+</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ===== SEARCH FUNCTIONALITY =====
+        function handleSearch(query) {
+            searchQuery = query.trim();
+            renderMenu();
+        }
+
+        // ===== CART MANAGEMENT =====
+        function addToCart(itemId) {
+            const item = menuData.find(i => i.id === itemId);
+            if (!item) return;
+
+            const existingItem = cart.find(i => i.id === itemId);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...item, quantity: 1 });
+            }
+
+            updateCartUI();
+            saveCartToStorage();
+            showAddAnimation(itemId);
+        }
+
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCartUI();
+            saveCartToStorage();
+        }
+
+        function updateQuantity(itemId, delta) {
+            const item = cart.find(i => i.id === itemId);
+            if (!item) return;
+
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                removeFromCart(itemId);
+            } else {
+                updateCartUI();
+                saveCartToStorage();
+            }
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cartBadge');
+            const container = document.getElementById('cartItemsContainer');
+            const summary = document.getElementById('cartSummary');
+            const whatsappBtn = document.getElementById('whatsappBtn');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.textContent = totalItems;
+            badge.style.display = totalItems > 0 ? 'flex' : 'none';
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <h3>Your cart is empty</h3>
+                        <p>Add some delicious items to get started!</p>
+                    </div>
+                `;
+                summary.innerHTML = '';
+                whatsappBtn.disabled = true;
+                return;
+            }
+
+            // Render cart items
+            container.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">NPR ${item.price} × ${item.quantity}</div>
+                        <div class="cart-item-controls">
+                            <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)">−</button>
+                            <span class="quantity-display">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                            <button class="remove-item-btn" onclick="removeFromCart('${item.id}')">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Calculate totals
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const discount = Math.round(subtotal * (discountPercentage / 100));
+            const total = subtotal - discount;
+
+            // Render summary
+            summary.innerHTML = `
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span>NPR ${subtotal}</span>
+                </div>
+                ${discount > 0 ? `
+                    <div class="summary-row discount">
+                        <span>Discount (${discountPercentage}%):</span>
+                        <span>- NPR ${discount}</span>
+                    </div>
+                ` : ''}
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span>NPR ${total}</span>
+                </div>
+            `;
+
+            whatsappBtn.disabled = false;
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cartSidebar');
+            const overlay = document.getElementById('cartOverlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function showAddAnimation(itemId) {
+            const card = document.querySelector(`[data-item-id="${itemId}"]`);
+            if (card) {
+                card.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 200);
+            }
+        }
+
+        // ===== LOCAL STORAGE =====
+        function saveCartToStorage() {
+            localStorage.setItem('purbhanchal_cart', JSON.stringify(cart));
+        }
+
+        function loadCartFromStorage() {
+            const saved = localStorage.getItem('purbhanchal_cart');
+            if (saved) {
+                try {
+                    cart = JSON.parse(saved);
+                    updateCartUI();
+                } catch (e) {
+                    console.error('Failed to load cart:', e);
+                }
+            }
+        }
+
+        // ===== DISCOUNT GAME (12-HOUR COOLDOWN) =====
+        function checkGameStatus() {
+            const lastPlayed = localStorage.getItem('purbhanchal_last_game');
+            const savedDiscount = localStorage.getItem('purbhanchal_discount');
+            
+            if (lastPlayed) {
+                const lastPlayedDate = new Date(parseInt(lastPlayed));
+                const now = new Date();
+                const hoursSinceLastPlay = (now - lastPlayedDate) / (1000 * 60 * 60);
+                
+                // Changed from 24 hours to 12 hours
+                if (hoursSinceLastPlay < 12) {
+                    hasPlayedGame = true;
+                    if (savedDiscount) {
+                        discountPercentage = parseInt(savedDiscount);
+                        document.getElementById('playGameBtn').disabled = true;
+                        
+                        // Calculate remaining time
+                        const hoursRemaining = Math.ceil(12 - hoursSinceLastPlay);
+                        document.getElementById('discountInfo').textContent = `Play again in ${hoursRemaining} hour${hoursRemaining > 1 ? 's' : ''}`;
+                        document.getElementById('discountApplied').textContent = `✨ ${discountPercentage}% Discount Active!`;
+                    }
+                } else {
+                    resetGame();
+                }
+            }
+            
+            updateCartUI();
+        }
+
+        function resetGame() {
+            hasPlayedGame = false;
+            discountPercentage = 0;
+            localStorage.removeItem('purbhanchal_last_game');
+            localStorage.removeItem('purbhanchal_discount');
+            document.getElementById('playGameBtn').disabled = false;
+            document.getElementById('discountInfo').textContent = 'Scratch to win up to 20% off!';
+            document.getElementById('discountApplied').textContent = '';
+        }
+
+        function openDiscountGame() {
+            if (hasPlayedGame) {
+                alert('You can only play once every 12 hours!');
+                return;
+            }
+
+            document.getElementById('gameOverlay').classList.add('active');
+            document.getElementById('gameModal').classList.add('active');
+            initScratchCard();
+        }
+
+        function closeDiscountGame() {
+            document.getElementById('gameOverlay').classList.remove('active');
+            document.getElementById('gameModal').classList.remove('active');
+            
+            if (discountPercentage > 0) {
+                document.getElementById('discountApplied').textContent = `✨ ${discountPercentage}% Discount Active!`;
+                updateCartUI();
+            }
+        }
+
+        function initScratchCard() {
+            const canvas = document.getElementById('scratchCanvas');
+            const ctx = canvas.getContext('2d');
+            const container = canvas.parentElement;
+            
+            // Set canvas size
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+            
+            // Generate random discount
+            const discounts = [0, 5, 10, 15, 20];
+            const randomDiscount = discounts[Math.floor(Math.random() * discounts.length)];
+            discountPercentage = randomDiscount;
+            
+            // Show discount result
+            document.getElementById('resultPercentage').textContent = `${discountPercentage}%`;
+            
+            // Draw scratch layer
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#B388FF');
+            gradient.addColorStop(1, '#FF4081');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add scratch text
+            ctx.font = 'bold 30px Inter';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('SCRATCH HERE', canvas.width / 2, canvas.height / 2);
+            
+            let isScratching = false;
+            let scratchedArea = 0;
+            
+            function scratch(x, y) {
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 30, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Calculate scratched area
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                let transparentPixels = 0;
+                for (let i = 3; i < imageData.data.length; i += 4) {
+                    if (imageData.data[i] === 0) transparentPixels++;
+                }
+                scratchedArea = (transparentPixels / (canvas.width * canvas.height)) * 100;
+                
+                // Auto-reveal if 50% scratched
+                if (scratchedArea > 50 && !hasPlayedGame) {
+                    revealDiscount();
+                }
+            }
+            
+            function revealDiscount() {
+                canvas.style.opacity = '0';
+                canvas.style.transition = 'opacity 0.3s ease';
+                
+                // Save to storage with current timestamp
+                hasPlayedGame = true;
+                localStorage.setItem('purbhanchal_last_game', Date.now().toString());
+                localStorage.setItem('purbhanchal_discount', discountPercentage.toString());
+                
+                document.getElementById('playGameBtn').disabled = true;
+                document.getElementById('discountInfo').textContent = 'Play again in 12 hours';
+            }
+            
+            // Mouse events
+            canvas.addEventListener('mousedown', (e) => {
+                isScratching = true;
+                const rect = canvas.getBoundingClientRect();
+                scratch(e.clientX - rect.left, e.clientY - rect.top);
+            });
+            
+            canvas.addEventListener('mousemove', (e) => {
+                if (!isScratching) return;
+                const rect = canvas.getBoundingClientRect();
+                scratch(e.clientX - rect.left, e.clientY - rect.top);
+            });
+            
+            canvas.addEventListener('mouseup', () => {
+                isScratching = false;
+            });
+            
+            canvas.addEventListener('mouseleave', () => {
+                isScratching = false;
+            });
+            
+            // Touch events
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                isScratching = true;
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                scratch(touch.clientX - rect.left, touch.clientY - rect.top);
+            });
+            
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (!isScratching) return;
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                scratch(touch.clientX - rect.left, touch.clientY - rect.top);
+            });
+            
+            canvas.addEventListener('touchend', () => {
+                isScratching = false;
+            });
+        }
+
+        // ===== WHATSAPP INTEGRATION (FIXED) =====
+        function sendToWhatsApp() {
+            const tableNumber = document.getElementById('tableNumberInput').value.trim();
+            
+            if (!tableNumber) {
+                alert('Please enter your table number!');
+                document.getElementById('tableNumberInput').focus();
+                return;
+            }
+            
+            if (cart.length === 0) {
+                alert('Your cart is empty! Please add items before ordering.');
+                return;
+            }
+            
+            // Calculate totals
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const discount = Math.round(subtotal * (discountPercentage / 100));
+            const total = subtotal - discount;
+            
+            // Format message with proper encoding
+            let message = `*🏔️ PURBHANCHAL RESTRO & BAR*%0A`;
+            message += `━━━━━━━━━━━━━━━━━━━━%0A%0A`;
+            message += `📍 *Table Number:* ${tableNumber}%0A%0A`;
+            message += `*ORDER DETAILS:*%0A`;
+            message += `━━━━━━━━━━━━━━━━━━━━%0A`;
+            
+            cart.forEach((item, index) => {
+                message += `${index + 1}. *${item.name}*%0A`;
+                message += `   Qty: ${item.quantity} × NPR ${item.price} = NPR ${item.price * item.quantity}%0A%0A`;
+            });
+            
+            message += `━━━━━━━━━━━━━━━━━━━━%0A`;
+            message += `Subtotal: NPR ${subtotal}%0A`;
+            
+            if (discount > 0) {
+                message += `Discount (${discountPercentage}%%): - NPR ${discount}%0A`;
+            }
+            
+            message += `*TOTAL: NPR ${total}*%0A`;
+            message += `━━━━━━━━━━━━━━━━━━━━%0A%0A`;
+            message += `Thank you for ordering! 🙏`;
+            
+            // WhatsApp phone number (without + sign for API)
+            const phoneNumber = '9779706984499';
+            
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappURL, '_blank');
+            
+            // Optional: Show success message
+            setTimeout(() => {
+                alert('✅ Order sent to WhatsApp! Please complete your order in WhatsApp.');
+            }, 500);
+        }
+    </script>
+</body>
+</html>
